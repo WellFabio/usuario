@@ -17,7 +17,6 @@ import java.util.List;
 @Builder
 
     public class Usuario implements UserDetails {
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
