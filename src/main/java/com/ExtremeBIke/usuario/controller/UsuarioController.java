@@ -1,8 +1,9 @@
 package com.ExtremeBIke.usuario.controller;
 
 import com.ExtremeBIke.usuario.business.UsuarioService;
+import com.ExtremeBIke.usuario.business.dto.EnderecoDTO;
+import com.ExtremeBIke.usuario.business.dto.TelefoneDTO;
 import com.ExtremeBIke.usuario.business.dto.UsuarioDTO;
-import com.ExtremeBIke.usuario.infrastructure.entity.Usuario;
 import com.ExtremeBIke.usuario.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class UsuarioController {
 
     @GetMapping
 
-    public ResponseEntity<Usuario> buscaUsuarioPorEmail(@RequestParam("email") String email) {
+    public ResponseEntity<UsuarioDTO> buscaUsuarioPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -50,5 +51,17 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDTO> atualizDadosUsuario(@RequestBody UsuarioDTO dto,
                                                           @RequestHeader("Authorization") String token){
         return ResponseEntity.ok(usuarioService.atualizacoaDadosUsuario(token,dto));
+    }
+
+    @PutMapping("/enderecos")
+    public ResponseEntity<EnderecoDTO> atualizDadosUsuario(@RequestBody EnderecoDTO dto,
+                                                           @RequestParam("id") Long id){
+        return ResponseEntity.ok(usuarioService.atualizaEndereco(id,dto));
+    }
+
+    @PutMapping("/telefones")
+    public ResponseEntity<TelefoneDTO> atualizDadosUsuario(@RequestBody TelefoneDTO dto,
+                                                           @RequestParam("id") Long id) {
+        return ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
     }
 }
