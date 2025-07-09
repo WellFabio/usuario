@@ -4,6 +4,7 @@ import com.ExtremeBIke.usuario.business.converter.UsuarioConverter;
 import com.ExtremeBIke.usuario.business.dto.UsuarioDTO;
 import com.ExtremeBIke.usuario.infrastructure.entity.Usuario;
 import com.ExtremeBIke.usuario.infrastructure.exceptions.ConflictException;
+import com.ExtremeBIke.usuario.infrastructure.exceptions.ResourceNotFoundException;
 import com.ExtremeBIke.usuario.infrastructure.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,5 +41,14 @@ public class UsuarioService {
     }
     public boolean verificaEmailExistente(String email){
         return usuarioRepository.existsByEmail(email);
+    }
+
+    public Usuario buscarUsuarioPorEmail(String email){
+        return usuarioRepository.findByEmail(email).orElseThrow(
+                () -> new ResourceNotFoundException("Email não encontrado" + email));
+    }
+
+    public void deletaUsuarioPOrEmail(String email){
+        usuarioRepository.deleteByEmail(email);
     }
 }
