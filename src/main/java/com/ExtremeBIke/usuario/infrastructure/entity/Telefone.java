@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "telefones")
+@Table(name = "telefone")
 @Builder
 
 public class Telefone {
