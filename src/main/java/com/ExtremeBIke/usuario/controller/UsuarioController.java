@@ -43,7 +43,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{email}")
     public ResponseEntity<Void> deletaUsuarioPorEmail(@PathVariable String email) {
-        usuarioService.deletaUsuarioPOrEmail(email);
+        usuarioService.deletaUsuarioPorEmail(email);
         return ResponseEntity.ok() .build();
     }
 
@@ -53,15 +53,27 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.atualizacoaDadosUsuario(token,dto));
     }
 
-    @PutMapping("/enderecos")
-    public ResponseEntity<EnderecoDTO> atualizDadosUsuario(@RequestBody EnderecoDTO dto,
+    @PutMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> atualizaEndereco(@RequestBody EnderecoDTO dto,
                                                            @RequestParam("id") Long id){
         return ResponseEntity.ok(usuarioService.atualizaEndereco(id,dto));
     }
 
-    @PutMapping("/telefones")
-    public ResponseEntity<TelefoneDTO> atualizDadosUsuario(@RequestBody TelefoneDTO dto,
+    @PutMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> atualizaTelefone(@RequestBody TelefoneDTO dto,
                                                            @RequestParam("id") Long id) {
         return ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
+    }
+
+    @PostMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> cadastroEndereco(@RequestBody EnderecoDTO dto,
+                                                        @RequestHeader("Authorization")String token){
+        return ResponseEntity.ok(usuarioService.cadastraEndereco(token, dto));
+    }
+
+    @PostMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> cadastroTelefone(@RequestBody TelefoneDTO dto,
+                                                        @RequestHeader("Authorization")String token) {
+        return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
     }
 }
