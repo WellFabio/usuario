@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 
 public class UsuarioConverter {
-//Complicado
+//Complicado e pota complicado
     public Usuario paraUsuario(UsuarioDTO usuarioDTO){
        return Usuario.builder()
                .nome(usuarioDTO.getNome())
